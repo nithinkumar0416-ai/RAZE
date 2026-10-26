@@ -6,6 +6,7 @@ const isVercel = !!process.env.VERCEL;
 const DB_DIR = isVercel ? '/tmp' : path.resolve(process.cwd(), 'data');
 
 let databaseInstance: DatabaseSync;
+let activeDbPath = ':memory:';
 
 try {
   if (!fs.existsSync(DB_DIR)) {
@@ -13,6 +14,7 @@ try {
   }
   const DB_PATH = path.join(DB_DIR, 'openguard.sqlite');
   databaseInstance = new DatabaseSync(DB_PATH);
+  activeDbPath = DB_PATH;
   try {
     databaseInstance.exec('PRAGMA journal_mode = WAL;');
   } catch {
@@ -22,6 +24,7 @@ try {
 } catch (err) {
   console.warn('⚠️ File SQLite failed, falling back to in-memory SQLite database:', err);
   databaseInstance = new DatabaseSync(':memory:');
+  activeDbPath = ':memory:';
 }
 
 export const db = databaseInstance;
@@ -290,7 +293,7 @@ export function initDatabase() {
 
   db.exec(schema);
   initRazeDefaults();
-  console.log('✓ SQLite database initialized successfully at', DB_PATH);
+  console.log('✓ SQLite database initialized successfully at', activeDbPath);
 }
 
 function initRazeDefaults() {

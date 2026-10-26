@@ -206,16 +206,26 @@ export const api = {
   },
 
   async getConversations(userId?: string): Promise<RazeConversation[]> {
-    const url = userId ? `${API_BASE}/agent/conversations?user_id=${encodeURIComponent(userId)}` : `${API_BASE}/agent/conversations`;
-    const res = await fetch(url);
-    const json = await res.json();
-    return json.data || [];
+    try {
+      const url = userId ? `${API_BASE}/agent/conversations?user_id=${encodeURIComponent(userId)}` : `${API_BASE}/agent/conversations`;
+      const res = await fetch(url);
+      if (!res.ok) return [];
+      const json = await res.json();
+      return json.data || [];
+    } catch {
+      return [];
+    }
   },
 
   async getConversationMessages(conversationId: string): Promise<RazeMessage[]> {
-    const res = await fetch(`${API_BASE}/agent/conversations/${conversationId}/messages`);
-    const json = await res.json();
-    return json.data || [];
+    try {
+      const res = await fetch(`${API_BASE}/agent/conversations/${conversationId}/messages`);
+      if (!res.ok) return [];
+      const json = await res.json();
+      return json.data || [];
+    } catch {
+      return [];
+    }
   },
 
   // Tasks Management
