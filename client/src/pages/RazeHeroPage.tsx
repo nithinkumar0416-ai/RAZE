@@ -70,47 +70,65 @@ export const RazeHeroPage: React.FC<RazeHeroPageProps> = ({ onAwaken, onNavigate
           </div>
         </div>
 
-        {/* Center Prompt & Atmospheric Spacing */}
-        <div className="flex-1 flex flex-col items-center justify-center pointer-events-none text-center max-w-2xl mt-12">
-          {/* Subtle cosmic focus tag */}
-          <div className="inline-block mb-3 px-3 py-1 rounded border border-white/5 bg-white/[0.02] backdrop-blur-sm">
-            <span className="font-mono text-[11px] tracking-cinematic text-raze-blue uppercase">
-              Autonomous Intelligence Architecture
-            </span>
-          </div>
-        </div>
+        {/* Center Space: Open and unobstructed so the 3D particle intelligence figure dominates */}
+        <div className="flex-1 pointer-events-none" />
 
-        {/* Bottom Hero Anchor: Wordmark, Tagline, & CTAs */}
-        <div className="relative z-10 w-full max-w-4xl flex flex-col items-center text-center pb-6 pointer-events-auto">
-          {/* Distinctive Uppercase Wordmark: RAZE AI */}
+        {/* Bottom Hero Anchor: Cinematic Wordmark, Tagline, Mode Launcher, & CTAs */}
+        <div className="relative z-10 w-full max-w-4xl flex flex-col items-center text-center pb-4 pointer-events-auto">
+          {/* Cinema Poster Style Wordmark: RAZE */}
           <div className="group relative cursor-default select-none">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-raze-blue/10 border border-raze-blue/25 text-raze-cyan text-[11px] font-mono tracking-widest uppercase mb-3 backdrop-blur-md">
-              <Sparkles className="w-3 h-3 text-raze-cyan animate-pulse" />
-              <span>Next-Generation AI Assistant</span>
-            </div>
-            <h1 className="font-raze text-6xl sm:text-7xl md:text-8xl font-black tracking-ultra text-white text-glow-ice transition-transform duration-300 hover:scale-[1.02]">
-              RAZE AI
+            <h1 className="font-raze text-5xl sm:text-6xl md:text-7xl font-bold tracking-ultra text-white text-glow-ice transition-transform duration-300 hover:scale-[1.01]">
+              RAZE
             </h1>
-            <div className="h-0.5 w-36 mx-auto mt-2 bg-gradient-to-r from-transparent via-raze-blue to-transparent opacity-70" />
+            <div className="h-0.5 w-32 mx-auto mt-2 bg-gradient-to-r from-transparent via-raze-cyan to-transparent opacity-70" />
           </div>
 
           {/* Tagline */}
-          <p className="font-raze text-sm sm:text-base md:text-lg tracking-cinematic text-raze-cyan font-semibold mt-4">
+          <p className="font-raze text-xs sm:text-sm tracking-cinematic text-raze-cyan font-semibold mt-2.5">
             THINK BEYOND LIMITS.
           </p>
 
-          {/* Headline */}
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-light text-white tracking-wide mt-3 font-sans">
-            Intelligence that moves with you.
-          </h2>
-
-          {/* Subtitle & Product Description */}
-          <p className="text-xs sm:text-sm text-raze-silverMuted max-w-xl mt-2 font-sans font-light tracking-wide leading-relaxed">
-            Your personal intelligence for thinking, creating, researching, and getting things done. Ask anything. Explore ideas. Create something extraordinary.
-          </p>
+          {/* Quick Neural Mode Launchers */}
+          <div className="flex items-center gap-2 mt-4 flex-wrap justify-center max-w-xl">
+            <button
+              onClick={() => { onAwaken(); onNavigate('agent'); }}
+              className="px-3 py-1 rounded-full bg-raze-void/80 border border-white/10 hover:border-raze-blue/50 text-[11px] font-mono text-raze-ice backdrop-blur-md transition-all flex items-center gap-1.5 hover:bg-raze-blue/10 shadow-sm"
+            >
+              <Cpu className="w-3 h-3 text-raze-blue" />
+              <span>THINK</span>
+            </button>
+            <button
+              onClick={() => onNavigate('research')}
+              className="px-3 py-1 rounded-full bg-raze-void/80 border border-white/10 hover:border-raze-cyan/50 text-[11px] font-mono text-raze-ice backdrop-blur-md transition-all flex items-center gap-1.5 hover:bg-raze-cyan/10 shadow-sm"
+            >
+              <Search className="w-3 h-3 text-raze-cyan" />
+              <span>RESEARCH</span>
+            </button>
+            <button
+              onClick={() => onNavigate('tasks')}
+              className="px-3 py-1 rounded-full bg-raze-void/80 border border-white/10 hover:border-raze-blueGlow/50 text-[11px] font-mono text-raze-ice backdrop-blur-md transition-all flex items-center gap-1.5 hover:bg-raze-blueGlow/10 shadow-sm"
+            >
+              <Hammer className="w-3 h-3 text-raze-blueGlow" />
+              <span>BUILD</span>
+            </button>
+            <button
+              onClick={() => { onAwaken(); onNavigate('agent'); }}
+              className="px-3 py-1 rounded-full bg-raze-void/80 border border-white/10 hover:border-raze-orange/50 text-[11px] font-mono text-raze-ice backdrop-blur-md transition-all flex items-center gap-1.5 hover:bg-raze-orange/10 shadow-sm"
+            >
+              <Sparkles className="w-3 h-3 text-raze-orange" />
+              <span>CREATE</span>
+            </button>
+            <button
+              onClick={() => { onAwaken(); onNavigate('agent'); }}
+              className="px-3 py-1 rounded-full bg-raze-void/80 border border-white/10 hover:border-emerald-400/50 text-[11px] font-mono text-raze-ice backdrop-blur-md transition-all flex items-center gap-1.5 hover:bg-emerald-400/10 shadow-sm"
+            >
+              <ShieldCheck className="w-3 h-3 text-emerald-400" />
+              <span>ANALYZE</span>
+            </button>
+          </div>
 
           {/* Interactive CTAs */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 mt-8 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-center gap-3.5 mt-5 w-full sm:w-auto">
             {/* Primary Action: Start a conversation */}
             <button
               id="btn-start-conversation"
@@ -118,23 +136,23 @@ export const RazeHeroPage: React.FC<RazeHeroPageProps> = ({ onAwaken, onNavigate
               className="group relative px-8 py-3.5 rounded-xl bg-gradient-to-r from-raze-blue via-raze-cyan to-raze-blue bg-[length:200%_auto] hover:bg-right transition-all duration-500 font-raze text-xs sm:text-sm font-bold tracking-wider text-raze-void shadow-glow-cyan flex items-center justify-center gap-2.5 w-full sm:w-auto"
             >
               <Zap className="w-4 h-4 fill-raze-void" />
-              <span>START A CONVERSATION</span>
+              <span>START CONVERSATION</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </button>
 
-            {/* Secondary Action: Explore RAZE */}
+            {/* Secondary Action: Explore Architecture */}
             <button
               onClick={scrollToCapabilities}
               className="px-7 py-3.5 rounded-xl bg-raze-card border border-white/10 hover:border-raze-blue/40 hover:bg-white/[0.04] transition-all font-mono text-xs sm:text-sm text-raze-ice tracking-wide flex items-center justify-center gap-2 w-full sm:w-auto backdrop-blur-md"
             >
-              <span>EXPLORE RAZE</span>
+              <span>EXPLORE ARCHITECTURE</span>
               <ChevronDown className="w-4 h-4 text-raze-blue" />
             </button>
           </div>
 
           {/* Hand click hint */}
-          <p className="text-[11px] font-mono text-raze-silverMuted/60 mt-5">
-            Tip: Hover over and click the glowing palm in the central silhouette to release energy
+          <p className="text-[11px] font-mono text-raze-silverMuted/50 mt-4">
+            Click the glowing palm energy core to awaken RAZE
           </p>
         </div>
       </section>
