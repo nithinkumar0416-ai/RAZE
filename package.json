@@ -1,0 +1,33 @@
+{
+  "name": "openguard-ai-raze",
+  "version": "1.0.0",
+  "description": "OpenGuard AI: The Self-Healing, Self-Protecting Open-Source Ecosystem",
+  "scripts": {
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "dev": "node scripts/dev.js",
+    "build": "cd client && npm install && npm run build",
+    "vercel-build": "cd client && npm install && npm run build",
+    "test": "cd server && npm test",
+    "start": "cd server && npm start"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "zod": "^3.24.2"
+  },
+  "keywords": [
+    "raze-ai",
+    "ai-agent",
+    "starmind",
+    "autonomous-agent",
+    "astra-stars"
+  ],
+  "author": "RAZE AI Team",
+  "license": "Apache-2.0"
+}

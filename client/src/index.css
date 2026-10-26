@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: #030407;
+  color: #F8FAFC;
+  background-image: 
+    radial-gradient(circle at 50% 10%, rgba(56, 189, 248, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(255, 87, 34, 0.04) 0%, transparent 60%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* Wide Letter Spacing Utilities for RAZE Branding */
+.tracking-cinematic {
+  letter-spacing: 0.35em;
+}
+
+.tracking-ultra {
+  letter-spacing: 0.55em;
+}
+
+/* Wordmark Glow */
+.text-glow-ice {
+  text-shadow: 0 0 20px rgba(224, 242, 254, 0.6), 0 0 40px rgba(56, 189, 248, 0.4);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+}
+
+.text-glow-orange {
+  text-shadow: 0 0 18px rgba(255, 87, 34, 0.6);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080B14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #151B2B;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #638CFF;
+}
+
+/* Glassmorphism panel styles */
+.glass-panel {
+  background: rgba(21, 27, 43, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(99, 140, 255, 0.35);
+  box-shadow: 0 0 20px -5px rgba(99, 140, 255, 0.2);
+}
+
+/* Cybernetic Glowing Borders */
+.border-glow-primary {
+  border-color: rgba(99, 140, 255, 0.5);
+  box-shadow: 0 0 15px -3px rgba(99, 140, 255, 0.3);
+}
+
+.border-glow-danger {
+  border-color: rgba(255, 77, 109, 0.5);
+  box-shadow: 0 0 15px -3px rgba(255, 77, 109, 0.3);
+}
+
+.border-glow-cyan {
+  border-color: rgba(77, 226, 242, 0.5);
+  box-shadow: 0 0 15px -3px rgba(77, 226, 242, 0.3);
+}
+
+/* Pulse animation for active agents */
+@keyframes agentPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(77, 226, 242, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(77, 226, 242, 0);
+  }
+}
+
+.agent-active-pulse {
+  animation: agentPulse 2s infinite ease-in-out;
+}
