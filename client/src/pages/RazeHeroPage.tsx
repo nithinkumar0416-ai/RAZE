@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { RazeCinematicCanvas } from '../components/canvas/RazeCinematicCanvas';
 import { 
   Cpu, 
