@@ -21,6 +21,17 @@ interface RazeHeroPageProps {
 
 export const RazeHeroPage: React.FC<RazeHeroPageProps> = ({ onAwaken, onNavigate }) => {
   const capabilitiesRef = useRef<HTMLDivElement | null>(null);
+  const [uiParallax, setUiParallax] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMove = (e: MouseEvent) => {
+      const normX = (e.clientX / window.innerWidth) * 2 - 1;
+      const normY = (e.clientY / window.innerHeight) * 2 - 1;
+      setUiParallax({ x: -normX * 7, y: -normY * 5 });
+    };
+    window.addEventListener('mousemove', handleMove);
+    return () => window.removeEventListener('mousemove', handleMove);
+  }, []);
 
   const scrollToCapabilities = () => {
     capabilitiesRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -74,7 +85,10 @@ export const RazeHeroPage: React.FC<RazeHeroPageProps> = ({ onAwaken, onNavigate
         <div className="flex-1 pointer-events-none" />
 
         {/* Bottom Hero Anchor: Cinematic Wordmark, Tagline, Mode Launcher, & CTAs */}
-        <div className="relative z-10 w-full max-w-4xl flex flex-col items-center text-center pb-4 pointer-events-auto">
+        <div 
+          className="relative z-10 w-full max-w-4xl flex flex-col items-center text-center pb-4 pointer-events-auto transition-transform duration-200 ease-out"
+          style={{ transform: `translate3d(${uiParallax.x}px, ${uiParallax.y}px, 0)` }}
+        >
           {/* Cinema Poster Style Wordmark: RAZE */}
           <div className="group relative cursor-default select-none">
             <h1 className="font-raze text-5xl sm:text-6xl md:text-7xl font-bold tracking-ultra text-white text-glow-ice transition-transform duration-300 hover:scale-[1.01]">
