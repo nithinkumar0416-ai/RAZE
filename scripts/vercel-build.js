@@ -12,6 +12,9 @@ if (fs.existsSync('client')) {
   const targetDist = path.join(process.cwd(), 'dist');
   
   if (fs.existsSync(srcDist)) {
+    if (fs.existsSync(targetDist)) {
+      fs.rmSync(targetDist, { recursive: true, force: true });
+    }
     fs.cpSync(srcDist, targetDist, { recursive: true });
     console.log('✓ Successfully mirrored client/dist -> ./dist');
   }
