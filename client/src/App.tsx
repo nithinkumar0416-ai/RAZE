@@ -13,6 +13,8 @@ import { AstraStarfield } from './components/canvas/AstraStarfield';
 // Secondary sandbox pages (for deep code verification)
 import { VerificationRunsPage } from './pages/VerificationRunsPage';
 import { LiveVerificationRoomPage } from './pages/LiveVerificationRoomPage';
+import { RazeCopilotPage } from './pages/RazeCopilotPage';
+import { RazeCopilotDrawer } from './components/copilot/RazeCopilotDrawer';
 
 export const App: React.FC = () => {
   const [currentPath, setCurrentPath] = useState<string>(window.location.pathname || '/');
@@ -66,9 +68,12 @@ export const App: React.FC = () => {
     if (currentPath === '/settings') {
       return <RazeSettingsPage />;
     }
+    if (currentPath === '/copilot' || currentPath === '/verification') {
+      return <RazeCopilotPage />;
+    }
 
     // Secondary Verification Sandbox Routes
-    if (currentPath === '/runs' || currentPath === '/verification') {
+    if (currentPath === '/runs') {
       return <VerificationRunsPage onNavigate={navigate} />;
     }
     if (currentPath.startsWith('/runs/')) {
@@ -104,6 +109,9 @@ export const App: React.FC = () => {
       <main className="relative z-10 flex-1 w-full">
         {renderCurrentPage()}
       </main>
+
+      {/* Global Floating RAZE Copilot Drawer */}
+      <RazeCopilotDrawer onNavigate={navigate} />
     </div>
   );
 };

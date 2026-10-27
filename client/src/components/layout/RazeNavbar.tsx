@@ -8,9 +8,11 @@ import {
   Settings, 
   Zap, 
   ShieldAlert, 
+  ShieldCheck,
   Menu, 
   X,
-  Compass
+  Compass,
+  Bot
 } from 'lucide-react';
 
 interface RazeNavbarProps {
@@ -23,6 +25,7 @@ export const RazeNavbar: React.FC<RazeNavbarProps> = ({ currentPath, onNavigate 
 
   const navItems = [
     { label: 'HOME', path: '/', icon: <Compass className="w-3.5 h-3.5" /> },
+    { label: 'COPILOT', path: '/copilot', icon: <ShieldCheck className="w-3.5 h-3.5 text-raze-cyan" />, badge: '7-STAGE' },
     { label: 'AGENT', path: '/agent', icon: <Cpu className="w-3.5 h-3.5" /> },
     { label: 'TASKS', path: '/tasks', icon: <Terminal className="w-3.5 h-3.5" /> },
     { label: 'RESEARCH', path: '/research', icon: <Search className="w-3.5 h-3.5" /> },
@@ -68,7 +71,7 @@ export const RazeNavbar: React.FC<RazeNavbarProps> = ({ currentPath, onNavigate 
               <button
                 key={item.path}
                 onClick={() => handleNav(item.path)}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg font-mono text-xs tracking-wider transition-all ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-mono text-xs tracking-wider transition-all ${
                   active
                     ? 'bg-raze-blue/15 text-raze-ice border border-raze-blue/40 shadow-glow-primary font-bold'
                     : 'text-raze-silverMuted hover:text-white hover:bg-white/[0.04]'
@@ -76,6 +79,11 @@ export const RazeNavbar: React.FC<RazeNavbarProps> = ({ currentPath, onNavigate 
               >
                 {item.icon}
                 <span>{displayLabel}</span>
+                {item.badge && (
+                  <span className="text-[9px] px-1.5 py-0.2 rounded bg-raze-cyan/15 text-raze-cyan border border-raze-cyan/30 font-bold ml-0.5">
+                    {item.badge}
+                  </span>
+                )}
               </button>
             );
           })}
@@ -127,14 +135,21 @@ export const RazeNavbar: React.FC<RazeNavbarProps> = ({ currentPath, onNavigate 
               <button
                 key={item.path}
                 onClick={() => handleNav(item.path)}
-                className={`w-full flex items-center gap-2.5 p-3 rounded-xl font-mono text-xs tracking-wider transition-all ${
+                className={`w-full flex items-center justify-between p-3 rounded-xl font-mono text-xs tracking-wider transition-all ${
                   active
                     ? 'bg-raze-blue/20 text-raze-ice border border-raze-blue/40 font-bold'
                     : 'text-raze-silverMuted hover:text-white hover:bg-white/5'
                 }`}
               >
-                {item.icon}
-                <span>{item.label}</span>
+                <div className="flex items-center gap-2.5">
+                  {item.icon}
+                  <span>{item.label}</span>
+                </div>
+                {item.badge && (
+                  <span className="text-[9px] px-2 py-0.5 rounded bg-raze-cyan/15 text-raze-cyan border border-raze-cyan/30 font-bold">
+                    {item.badge}
+                  </span>
+                )}
               </button>
             );
           })}

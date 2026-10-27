@@ -72,6 +72,13 @@ export const RazeAgentPage: React.FC<RazeAgentPageProps> = ({ onNavigateToTasks 
       icon: <Hammer className="w-4 h-4 text-raze-blueGlow" />
     },
     {
+      category: 'Copilot',
+      title: '7-Stage Copilot Verification',
+      prompt: 'Execute the 7-stage autonomous verification pipeline on Defect #104: baseline audit, repair shadow workspace, adversarial hunt (150%, NaN, -50), trust collapse, and deterministic gate.',
+      mode: 'analyze' as RazeAgentMode,
+      icon: <ShieldCheck className="w-4 h-4 text-raze-cyan" />
+    },
+    {
       category: 'Create',
       title: 'Draft System Specification',
       prompt: 'Draft an architectural technical specification for a self-healing distributed system with telemetry logging.',

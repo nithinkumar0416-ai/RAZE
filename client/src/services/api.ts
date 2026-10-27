@@ -1,7 +1,8 @@
 import { 
   Repository, VerificationRun, FullRunDetails, VerificationMemoryItem,
   RazeTask, RazeConversation, RazeMessage, RazeActivityLog, RazeProject, 
-  RazeMemoryNote, RazeResearchResult, RazeAgentMode 
+  RazeMemoryNote, RazeResearchResult, RazeAgentMode,
+  CopilotOverview, CopilotChatResponse
 } from '../types';
 
 const API_BASE = '/api';
@@ -344,5 +345,54 @@ export const api = {
     const res = await fetch(`${API_BASE}/notes/${id}`, { method: 'DELETE' });
     const json = await res.json();
     if (!json.success) throw new Error(json.error || 'Failed to delete note');
+  },
+
+  // ==========================================
+  // COPILOT VERIFICATION PIPELINE API METHODS
+  // ==========================================
+  async getCopilotStatus(runId?: string): Promise<CopilotOverview> {
+    const url = runId ? `${API_BASE}/copilot/status?run_id=${encodeURIComponent(runId)}` : `${API_BASE}/copilot/status`;
+    const res = await fetch(url);
+    const json = await res.json();
+    if (!json.success) throw new Error(json.error || 'Failed to fetch copilot status');
+    return json.data;
+  },
+
+  async triggerCopilotDefect104(): Promise<{ runId: string; message: string }> {
+    const res = await fetch(`${API_BASE}/copilot/trigger-defect-104`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.error || 'Failed to trigger Defect #104 verification');
+    return json.data;
+  },
+
+  async askCopilot(runId: string | undefined, message: string): Promise<CopilotChatResponse> {
+    const res = await fetch(`${API_BASE}/copilot/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ run_id: runId || undefined, message })
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.error || 'Failed to query copilot');
+    return json.data;
+  },
+
+  async signCopilotDecision(payload: {
+    run_id: string;
+    decision: 'APPROVED' | 'REJECTED' | 'REQUEST_REPAIR';
+    reviewed_patch_hash: string;
+    reviewer_name?: string;
+    notes?: string;
+  }): Promise<any> {
+    const res = await fetch(`${API_BASE}/copilot/sign-decision`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.error || 'Failed to record copilot decision');
+    return json.data;
   }
 };

@@ -286,3 +286,47 @@ export interface RazeResearchResult {
   insights: string[];
 }
 
+// ==========================================
+// COPILOT VERIFICATION PIPELINE TYPES
+// ==========================================
+export interface CopilotPipelineStageInfo {
+  id: string;
+  stageNumber: string;
+  name: string;
+  category: 'AUDIT' | 'SANDBOX' | 'REPAIR' | 'HUNT' | 'COLLAPSE' | 'MUTATION' | 'GATE' | 'SIGN';
+  bullets: string[];
+  status: 'PENDING' | 'ACTIVE' | 'PASSED' | 'FAILED' | 'BLOCKED';
+  activeAttempt?: number;
+  data?: any;
+}
+
+export interface CopilotOverview {
+  activeRunId?: string;
+  defectTitle: string;
+  defectDescription: string;
+  targetFile: string;
+  status: string;
+  currentStage: string;
+  currentAttempt: number;
+  maxRetries: number;
+  activePatchHash?: string;
+  releaseRecommendation: string;
+  counterexamplesCount: number;
+  mutationScore?: number;
+  stages: CopilotPipelineStageInfo[];
+  readyForHumanSign: boolean;
+}
+
+export interface CopilotActionItem {
+  label: string;
+  action: string;
+  payload?: any;
+}
+
+export interface CopilotChatResponse {
+  answer: string;
+  stageReference?: string;
+  actions?: CopilotActionItem[];
+  dataSnippet?: any;
+}
+

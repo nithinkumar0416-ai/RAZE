@@ -14,6 +14,7 @@ import { researchRouter } from './routes/research.js';
 import { activityRouter } from './routes/activity.js';
 import { projectsRouter } from './routes/projects.js';
 import { notesRouter } from './routes/notes.js';
+import { copilotRouter } from './routes/copilot.js';
 
 const app = express();
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
@@ -49,6 +50,7 @@ app.use('/api/repositories', repositoriesRouter);
 app.use('/api/runs', runsRouter);
 app.use('/api/memory', memoryRouter);
 app.use('/api/assistant', assistantRouter);
+app.use('/api/copilot', copilotRouter);
 app.use('/api/settings', settingsRouter);
 
 // Serve Static Frontend Assets (Complete Overall Website from Backend)
